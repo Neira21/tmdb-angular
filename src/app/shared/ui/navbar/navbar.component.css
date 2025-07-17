@@ -1,0 +1,44 @@
+/* Navbar con Tailwind CSS */
+@tailwind components;
+
+@layer components {
+  .navbar-gradient {
+    background: linear-gradient(135deg, #0d253f 0%, #01b4e4 100%);
+  }
+
+  .search-backdrop {
+    backdrop-filter: blur(10px);
+  }
+
+  .mobile-menu-animation {
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-animation.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .menu-icon span {
+    display: block;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  .menu-icon.open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+  }
+
+  .menu-icon.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-icon.open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+  }
+}
