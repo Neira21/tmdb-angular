@@ -22,7 +22,19 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": "src",
+    "paths":{
+      "@app/*": ["app/*"],
+      "@assets/*": ["assets/*"],
+      "@environments/*": ["environments/*"],
+      "@shared/*": ["shared/*"],
+      "@core/*": ["core/*"],
+      "@services/*": ["shared/services/*"],
+      "@pages/*": ["pages/*"],
+      "@sharedui/*": ["shared/ui/*"],
+
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

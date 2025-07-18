@@ -1,0 +1,54 @@
+<div class="min-h-screen bg-slate-900 text-white">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8 text-center">Series de TV Populares</h1>
+
+    <div class="flex justify-center my-8">
+      <nav class="flex space-x-2">
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">
+          Anterior
+        </button>
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">1</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">2</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">3</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">
+          Siguiente
+        </button>
+      </nav>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+      <div *ngFor="let series of tvSeries"
+           [routerLink]="['/tv', series.id]"
+           class="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+        <div class="aspect-[2/3] bg-slate-700 flex items-center justify-center">
+          <img src="https://image.tmdb.org/t/p/w500{{ series.poster_path }}" alt="{{ series.name }}">
+        </div>
+        <div class="p-4">
+          <h3 class="font-semibold text-sm mb-2 line-clamp-2">{{ series.name }}</h3>
+          <p class="text-slate-400 text-xs">{{ series.first_air_date }}</p>
+          <div class="flex items-center justify-between mt-2">
+            <div class="flex items-center">
+              <span class="text-yellow-400 text-xs">★</span>
+              <span class="text-slate-300 text-xs ml-1">{{ series.rating }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-8">
+      <nav class="flex space-x-2">
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">
+          Anterior
+        </button>
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg">1</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">2</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">3</button>
+        <button class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors">
+          Siguiente
+        </button>
+      </nav>
+    </div>
+
+  </div>
+</div>
