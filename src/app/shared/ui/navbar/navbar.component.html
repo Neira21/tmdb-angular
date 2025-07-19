@@ -74,9 +74,9 @@
     </div>
 
     <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center flex-1 justify-center">
+    <div class="hidden md:flex items-center justify-center">
       <ul class="flex list-none m-0 p-0 gap-2">
-        <li class="relative">
+        <li>
           <a
             routerLink="/"
             routerLinkActive="bg-white/20 shadow-lg"
@@ -84,76 +84,36 @@
             class="block px-4 py-3 text-white no-underline font-medium rounded-lg transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 relative overflow-hidden group"
           >
             Inicio
-            <span
-              class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-400 transition-all duration-300 transform -translate-x-1/2 group-hover:w-4/5"
-            ></span>
           </a>
         </li>
-        <li class="relative">
+        <li>
           <a
             routerLink="/movies"
             routerLinkActive="bg-white/20 shadow-lg"
             class="block px-4 py-3 text-white no-underline font-medium rounded-lg transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 relative overflow-hidden group"
           >
             Películas
-            <span
-              class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-400 transition-all duration-300 transform -translate-x-1/2 group-hover:w-4/5"
-            ></span>
           </a>
         </li>
-        <li class="relative">
+        <li>
           <a
             routerLink="/tv"
             routerLinkActive="bg-white/20 shadow-lg"
             class="block px-4 py-3 text-white no-underline font-medium rounded-lg transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 relative overflow-hidden group"
           >
             Series
-            <span
-              class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-400 transition-all duration-300 transform -translate-x-1/2 group-hover:w-4/5"
-            ></span>
           </a>
         </li>
-        <li class="relative">
+        <li>
           <a
             routerLink="/about"
             routerLinkActive="bg-white/20 shadow-lg"
             class="block px-4 py-3 text-white no-underline font-medium rounded-lg transition-all duration-300 hover:bg-white/10 hover:-translate-y-0.5 relative overflow-hidden group"
           >
             Acerca de
-            <span
-              class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-blue-400 transition-all duration-300 transform -translate-x-1/2 group-hover:w-4/5"
-            ></span>
           </a>
         </li>
       </ul>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="hidden md:block flex-shrink-0">
-      <div class="relative flex items-center">
-        <input
-          type="text"
-          placeholder="Buscar películas, series..."
-          class="w-64 px-4 py-3 pr-12 border-none rounded-full bg-white/10 text-white text-sm search-backdrop transition-all duration-300 focus:outline-none focus:bg-white/20 focus:shadow-lg focus:shadow-blue-400/30 focus:w-80 placeholder-white/70"
-        />
-        <button
-          class="absolute right-2 bg-transparent border-none text-white cursor-pointer p-2 rounded-full transition-all duration-300 hover:bg-white/10"
-        >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
-        </button>
-      </div>
     </div>
 
     <!-- Mobile Menu Button -->

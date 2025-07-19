@@ -1,36 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MoviesService } from '@app/shared/services/movies/movies.service';
 import { MovieInterface } from '@app/interfaces/movieInterface';
+import { environment } from '@environments/environment.development';
+import { BasePaginationComponent } from '@app/shared/base/base-pagination.component';
+import { PaginationComponent } from '@app/shared/ui/pagination/pagination.component';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, PaginationComponent],
   templateUrl: './movie-list.component.html'
 })
-export class MovieListComponent {
+export class MovieListComponent extends BasePaginationComponent implements OnInit {
 
-
+  // Array to hold movie data
   movies: MovieInterface[] = []
 
   // import service movie
   movieService = inject(MoviesService);
 
+  // Image URL from environment
+  imageUrl = environment.imageUrl;
+
   ngOnInit(): void {
-    this.movieService.getDataMovies().subscribe({
+    this.loadData();
+  }
+
+  loadData(page: number = 1): void {
+    this.loading = true;
+    this.movieService.getDataMovies(page).subscribe({
       next: (data) => {
         console.log(data);
-        // Filter results to only include MovieInterface items (those with a 'title' property)
         this.movies = data.results;
+        this.updatePaginationData(data);
       },
       error: (error) => {
-        console.error('Error fetching movies:', error);
+        this.handleError(error);
       }
     });
   }
-
-
-
 }

@@ -6,7 +6,6 @@ export interface TvInterface extends MediaBase {
   first_air_date: string;
   original_country: string[];
   genres_ids: string[];
-  creator?: string;
   cast?: { name: string; character: string }[];
 }
 
