@@ -5,15 +5,17 @@
     <!-- Pagination component (top) -->
     <app-pagination
       [currentPage]="currentPage"
-      [totalPages]="totalPages"
-      [totalResults]="totalResults"
-      [loading]="loading"
-      [itemType]="'series'"
-      (pageChange)="goToPage($event)"
+      [totalPagesAA]="totalPages"
+      [totalResults]="datosTotales"
+      [itemType1]="'series'"
+      (pageChange)="goToPage1($event)"
       (nextPageEvent)="nextPage()"
       (previousPageEvent)="previousPage()"
     ></app-pagination>
 
+    @if(loading) {
+    <app-loading />
+    } @else {
     <div class="flex justify-center max-w-[1200px] mx-auto">
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         @for(series of tvSeries; track series.id) {
@@ -47,17 +49,6 @@
         }
       </div>
     </div>
-
-    <!-- Pagination component (bottom) -->
-    <app-pagination
-      [currentPage]="currentPage"
-      [totalPages]="totalPages"
-      [totalResults]="totalResults"
-      [loading]="loading"
-      [itemType]="'series'"
-      (pageChange)="goToPage($event)"
-      (nextPageEvent)="nextPage()"
-      (previousPageEvent)="previousPage()"
-    ></app-pagination>
+    }
   </div>
 </div>

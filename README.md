@@ -1,27 +1,108 @@
 # TmdbAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.20.
+#### **Explicación**
 
-## Development server
+- **Tipado de datos en la carpeta interfaces: Define las interfaces para los datos que maneja la aplicación, como películas, series**.
+  1. mediaBase: Se define los datos de la respuesta de películas o series.
+  2. movieInterface y tvInterface: Se definen las interfaces específicas para películas y series, extendiendo de mediaBase.
+  3. En responseInterface se define la estructura de la respuesta de la API, incluyendo los resultados y la información de paginación y de forma genérica para las películas y series.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **Componentes de página: Cada página de la aplicación (como películas, series, detalles) tiene su propio componente que maneja la lógica y la presentación de esa sección específica.**
+  1. movie-list: Muestra una lista de películas.
+  2. tv-list: Muestra la lista de series.
+  3. movie: Muestra los detalles de una película específica.
+  4. tv: Muestra los detalles de una serie específica.
 
-## Code scaffolding
+- **shared: Contiene componentes, servicios reutilizables en toda la aplicación.**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+  1. base-pagination: Métodos para manejar la paginación de resultados.
+  2. Ui: Contiene componentes para el footer, Navbar que se verán en todas las páginas
+  3. services: Servicios para manejar la lógica de negocio, como la obtención de datos de películas y series, usuarios, etc.
 
-## Build
+- **AppComponent: Componente raíz de la aplicación.**
+```html
+  <app-navbar></app-navbar>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- **AppRoutingModule: Configuración de las rutas de la aplicación.**
+```typescript
+  export const routes: Routes = [
+  {
+    path: '',
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+  },
+  {
+    path: 'movies',
+    loadComponent: () => import('./pages/movie-list/movie-list.component').then(m => m.MovieListComponent)
+  },
+  {
+    path: 'movies/:id',
+    loadComponent: () => import('./pages/movie/movie.component').then(m => m.MovieComponent)
+  },
+  {
+    path: 'tv',
+    loadComponent: () => import('./pages/tv-list/tv-list.component').then(m => m.TvListComponent)
+  },
+  {
+    path: 'tv/:id',
+    loadComponent: () => import('./pages/tv/tv.component').then(m => m.TvComponent)
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent)
+  }
+];
+```
 
-## Running unit tests
+- Explicación de los servicios
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+ 1 **data.service:** Maneja la obtención de datos de películas y series desde la API de TMDB.
+Inserto las variables de entorno para la URL base y la clave de API.
+También el manejo de HttpClient para realizar las peticiones a la API.
 
-## Running end-to-end tests
+```typescript
+import { inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+http = inject(HttpClient);
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Ejemplo de un método para obtener películas:
+Uso el ResponseInterface para tipar la respuesta y uso MovieInterface para usar el genérico de películas. (Se puede usar movieInterface o tvInterface según el caso).
 
-## Further help
+```typescript
+getDataMovies(page: number = 1) {
+    return this.http.get<ResponseInterface<MovieInterface>>(
+      `${this.apiUrl}discover/movie?api_key=${this.apiKey}&page=${page}`
+    );
+  }
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+2. **movie-list.component.ts** LLamo al servicio en el componente de la lista de películas
+
+```typescript
+ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData(page: number = 1): void {
+    this.loading = true;
+    this.movieService.getDataMovies(page).subscribe({
+      next: (data) => {
+        this.movies = data.results;
+        // cuando cargue la data inicial, pasarle los datos al metodo de actualización de paginación
+        this.updatePaginationData(data);
+      },
+      error: (error) => {
+        this.handleError(error);
+      }
+    });
+  }
+  ```
+
+
+
+

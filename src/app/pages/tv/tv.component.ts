@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { TvDetailInterface } from '@app/interfaces/tvInterface';
 import { environment } from '@environments/environment.development';
-import { MoviesService } from '@app/shared/services/movies/movies.service';
+import { DataService } from '@app/shared/services/data.service';
 import { LoadingComponent } from '@app/components/loading/loading.component';
 
 @Component({
@@ -23,7 +23,7 @@ export class TvComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
 
   // inject service
-  service = inject(MoviesService); // Assuming you have a TvService similar to MoviesService
+  service = inject(DataService); // Assuming you have a TvService similar to MoviesService
 
   ngOnInit() {
     this.tvId = this.route.snapshot.paramMap.get('id');

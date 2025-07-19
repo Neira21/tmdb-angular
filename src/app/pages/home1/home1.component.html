@@ -1,0 +1,30 @@
+<h1 class="text-2xl mb-4">{{ title }}</h1>
+
+<form (submit)="handleSubmit($event, searchInput)" class="flex items-center bg-red-300 justify-center space-x-4 mb-8">
+  <div>
+    <label
+      for=""
+      class="text-sm font-medium"
+    >
+      <input
+        #searchInput
+        type="text"
+        class="bg-gray-800 text-white border border-gray-700 rounded-lg px-4 py-2"
+        placeholder="Buscar películas o series..."
+      />
+    </label>
+  </div>
+  <button
+    type="submit"
+    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+  >
+    Buscar
+  </button>
+  <button
+        type="button"
+        class="clear-button bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+        (click)="searchInput.value = ''; onSearch('BUSCAR')"
+      >
+        Limpiar
+  </button>
+</form>

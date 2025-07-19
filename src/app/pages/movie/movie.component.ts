@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
-import { MoviesService } from '@app/shared/services/movies/movies.service';
+import { DataService } from '@app/shared/services/data.service';
 import { MovieDetailInterface, MovieInterface } from '@app/interfaces/movieInterface';
 import { environment } from '@environments/environment.development';
 import { TvDetailInterface } from '@app/interfaces/tvInterface';
@@ -26,7 +26,7 @@ export class MovieComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
 
   //Inject service
-  movieService = inject(MoviesService);
+  movieService = inject(DataService);
 
   // Image URL from environment
   imageUrl = environment.imageUrl;

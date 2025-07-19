@@ -9,7 +9,7 @@ import { TvInterface, TvDetailInterface } from '@app/interfaces/tvInterface';
 @Injectable({
   providedIn: 'root'
 })
-export class MoviesService {
+export class DataService {
 
   private apiUrl = environment.apiUrl;
   private apiKey = environment.apiKey;

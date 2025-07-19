@@ -8,6 +8,16 @@
       >
         Bienvenido a TMDB App
       </h1>
+
+      <!-- Le paso mi variable title que está en el ts del padre(home.component.ts) -->
+      <!-- HIJO / PADRE -->
+      <!-- EN OUTPUT por ejemplo onSearch se usa en el hijo y el padre -->
+      <app-home1
+      [title]="title"
+      (search)="onSearch($event)"
+      />
+
+
       <p class="text-xl text-slate-300 mb-8">
         Descubre las mejores películas y series del momento con nuestro catálogo
         actualizado.
