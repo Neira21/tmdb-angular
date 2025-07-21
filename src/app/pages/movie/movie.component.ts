@@ -6,11 +6,14 @@ import { MovieDetailInterface, MovieInterface } from '@app/interfaces/movieInter
 import { environment } from '@environments/environment.development';
 import { TvDetailInterface } from '@app/interfaces/tvInterface';
 import { LoadingComponent } from '@app/components/loading/loading.component';
+import { YoutubeComponent } from '@app/components/youtube/youtube.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
+
 
 @Component({
   selector: 'app-movie',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoadingComponent],
+  imports: [CommonModule, RouterModule, LoadingComponent, YoutubeComponent, YouTubePlayerModule],
   templateUrl: './movie.component.html'
 })
 export class MovieComponent implements OnInit {
@@ -30,6 +33,10 @@ export class MovieComponent implements OnInit {
 
   // Image URL from environment
   imageUrl = environment.imageUrl;
+
+
+  // opened video ?
+  openVideo: boolean = false;
 
   /*
   id: 0,
@@ -93,6 +100,28 @@ export class MovieComponent implements OnInit {
 
   getCountriesString(): string {
     return this.movie.production_countries?.map(country => country.name).join(', ') || '';
+  }
+
+  toggleVideo(): void{
+    this.openVideo = !this.openVideo;
+  }
+
+  getIdTrailer(): string {
+    const trailer = this.movie?.videos?.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+    return trailer ? trailer.key : '';
+  }
+
+   addFavorite(id: number, favorite: boolean) {
+    this.movieService.postFavorite(id, favorite).subscribe({
+      next: (response) => {
+        console.log(response);
+        // Optionally, you can update the UI or show a success message
+      },
+      error: (error) => {
+        console.error('Error adding favorite:', error);
+        // Optionally, you can show an error message to the user
+      }
+    });
   }
 
 

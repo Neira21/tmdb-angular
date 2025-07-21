@@ -48,4 +48,6 @@ export class MovieListComponent extends BasePaginationComponent implements OnIni
       }
     });
   }
+
+
 }

@@ -121,11 +121,13 @@
         <div class="flex space-x-4">
           <button
             class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors"
+            (click)="toggleVideo()"
           >
             Ver Trailer
           </button>
           <button
             class="border border-slate-600 hover:border-slate-400 px-6 py-3 rounded-lg font-semibold transition-colors"
+            (click)="addFavorite(movie.id, true)"
           >
             Marcar como favorito
             <span>
@@ -146,6 +148,9 @@
             </span>
           </button>
         </div>
+        @if(openVideo){
+          <app-youtube (close) ="toggleVideo()"  [videoId]="getIdTrailer()"></app-youtube>
+        }
       </div>
     </div>
   </div>

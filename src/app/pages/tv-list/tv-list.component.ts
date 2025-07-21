@@ -44,4 +44,6 @@ export class TvListComponent extends BasePaginationComponent implements OnInit {
       }
     });
   }
+
+
 }

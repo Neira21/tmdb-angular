@@ -12,7 +12,8 @@ export interface MovieInterface extends MediaBase {
   video?: boolean;
 }
 
-export interface MovieDetailInterface extends Omit<MovieInterface, 'genres_ids'> {
+export interface MovieDetailInterface
+  extends Omit<MovieInterface, 'genres_ids'> {
   belongs_to_collection?: {
     id: number;
     name: string;
@@ -41,5 +42,17 @@ export interface MovieDetailInterface extends Omit<MovieInterface, 'genres_ids'>
     name: string;
   }[];
   status?: string;
+  videos?: {
+    results:
+      {
+        id: string;
+        iso_639_1: string;
+        iso_3166_1: string;
+        key: string;
+        name: string;
+        site: string;
+        size: number;
+        type: string;
+      }[];
+  };
 }
-

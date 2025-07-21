@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @Component({
   selector: 'app-youtube',
   standalone: true,
-  imports: [],
+  imports: [YouTubePlayerModule],
   templateUrl: './youtube.component.html'
 })
 export class YoutubeComponent {
@@ -15,4 +16,6 @@ export class YoutubeComponent {
   onClose(): void {
     this.close.emit();
   }
+
+
 }
