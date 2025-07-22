@@ -47,7 +47,7 @@ export class FavoritesComponent {
     this.data.postFavorite(id, favorite).subscribe({
       next: (response) => {
         console.log(response);
-        // Optionally, you can update the UI or show a success message
+        this.favorites = this.favorites.filter(movie => movie.id !== id);
       },
       error: (error) => {
         console.error('Error deleting favorite:', error);

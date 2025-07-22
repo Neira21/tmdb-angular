@@ -1,23 +1,37 @@
-<p>favorites works!</p>
+<p class="text-3xl">Tus películas y series favoritas!</p>
 
 @if(favorites.length > 0){
-  @for(favorite of favorites; track favorite.id) {
-    <div class="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer">
+
+<div class="flex justify-center max-w-[1200px] mx-auto">
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mt-8">
+    @for(favorite of favorites; track favorite.id) {
+    <div
+      class="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer"
+    >
       <div class="aspect-[2/3] bg-slate-700 flex items-center justify-center">
-        <img src="{{ imageUrl }}{{ favorite.poster_path }}" alt="{{ favorite.title }}" />
+        <img
+          src="{{ imageUrl }}{{ favorite.poster_path }}"
+          alt="{{ favorite.title }}"
+        />
       </div>
       <div class="p-4">
-        <h3 class="font-semibold text-sm mb-2 line-clamp-2">{{ favorite.title }}</h3>
+        <h3 class="font-semibold text-sm mb-2 line-clamp-2">
+          {{ favorite.title }}
+        </h3>
         <p class="text-slate-400 text-xs">{{ favorite.release_date }}</p>
         <div class="flex items-center justify-between mt-2">
-
-          <button class="bg-red-500 text-white px-2 py-1 rounded" (click)="deleteFavorite(favorite.id, false)">  Remove</button>
+          <button
+            class="bg-red-500 text-white px-2 py-1 rounded"
+            (click)="deleteFavorite(favorite.id, false)"
+          >
+            Remove
+          </button>
         </div>
       </div>
     </div>
-  }
+    }
+  </div>
+</div>
 } @else {
-  <p class="text-center text-slate-400">No tienes favoritos aún.</p>
+<p class="text-center text-slate-400">No tienes favoritos aún.</p>
 }
-
-

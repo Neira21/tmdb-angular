@@ -2,7 +2,10 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { DataService } from '@app/shared/services/data.service';
-import { MovieDetailInterface, MovieInterface } from '@app/interfaces/movieInterface';
+import {
+  MovieDetailInterface,
+  MovieInterface,
+} from '@app/interfaces/movieInterface';
 import { environment } from '@environments/environment.development';
 import { TvDetailInterface } from '@app/interfaces/tvInterface';
 import { LoadingComponent } from '@app/components/loading/loading.component';
@@ -10,17 +13,24 @@ import { YoutubeComponent } from '@app/components/youtube/youtube.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
 
 
+
+
 @Component({
   selector: 'app-movie',
   standalone: true,
-  imports: [CommonModule, RouterModule, LoadingComponent, YoutubeComponent, YouTubePlayerModule],
-  templateUrl: './movie.component.html'
+  imports: [
+    CommonModule,
+    RouterModule,
+    LoadingComponent,
+    YoutubeComponent,
+    YouTubePlayerModule,
+  ],
+  templateUrl: './movie.component.html',
 })
 export class MovieComponent implements OnInit {
-
   // Variables to hold movie data
   movieId: string | null = null;
-  movie: MovieDetailInterface = { } as MovieDetailInterface;
+  movie: MovieDetailInterface = {} as MovieDetailInterface;
 
   loading: boolean = true;
 
@@ -66,24 +76,22 @@ export class MovieComponent implements OnInit {
   */
 
   ngOnInit() {
-
     this.movieId = this.route.snapshot.paramMap.get('id');
 
     // Fetch movie data using the service
     if (this.movieId) {
       this.movieService.getDataMovie(this.movieId).subscribe({
-      next: (data: MovieDetailInterface) => {
-        this.loading = false;
-        this.movie = data;
-        console.log("aca", this.movie);
-      },
-      error: (error) => {
-        this.loading = false;
-        console.error('Error fetching movie:', error);
-      }
+        next: (data: MovieDetailInterface) => {
+          this.loading = false;
+          this.movie = data;
+          console.log('aca', this.movie);
+        },
+        error: (error) => {
+          this.loading = false;
+          console.error('Error fetching movie:', error);
+        },
       });
     }
-
   }
 
   goBack() {
@@ -91,39 +99,45 @@ export class MovieComponent implements OnInit {
   }
 
   getGenresString(): string {
-    return this.movie.genres?.map(genre => genre.name).join(', ') || '';
+    return this.movie.genres?.map((genre) => genre.name).join(', ') || '';
   }
 
   getCompaniesString(): string {
-    return this.movie.production_companies?.map(company => company.name).join(', ') || '';
+    return (
+      this.movie.production_companies
+        ?.map((company) => company.name)
+        .join(', ') || ''
+    );
   }
 
   getCountriesString(): string {
-    return this.movie.production_countries?.map(country => country.name).join(', ') || '';
+    return (
+      this.movie.production_countries
+        ?.map((country) => country.name)
+        .join(', ') || ''
+    );
   }
 
-  toggleVideo(): void{
+  toggleVideo(): void {
     this.openVideo = !this.openVideo;
   }
 
   getIdTrailer(): string {
-    const trailer = this.movie?.videos?.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+    const trailer = this.movie?.videos?.results.find(
+      (video) => video.type === 'Trailer' && video.site === 'YouTube'
+    );
     return trailer ? trailer.key : '';
   }
 
-   addFavorite(id: number, favorite: boolean) {
+  addFavorite(id: number, favorite: boolean) {
+
     this.movieService.postFavorite(id, favorite).subscribe({
       next: (response) => {
         console.log(response);
-        // Optionally, you can update the UI or show a success message
       },
       error: (error) => {
         console.error('Error adding favorite:', error);
-        // Optionally, you can show an error message to the user
-      }
+      },
     });
   }
-
-
-
 }
