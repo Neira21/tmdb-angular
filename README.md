@@ -1,5 +1,7 @@
 # TmdbAngular
 
+# Solución issue
+
 #### **Explicación**
 
 - **Tipado de datos en la carpeta interfaces: Define las interfaces para los datos que maneja la aplicación, como películas, series**.
